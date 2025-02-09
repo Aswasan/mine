@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>  
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.fa:hover {
+    color: cyan;
+    opacity: 0.7;
+    transform: scale(1.3); /* Increases size by 20% */
+}
+
+.fa-facebook {
+  
+  color: white;
+  border-radius: 50%;
+  width: 30px; /* Adjust width */
+  height: 30px; /* Adjust height */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px; /* Adjust icon size */
+  padding: 10px;
+}
+.fa-google {
+  color: white;
+  border-radius: 50%;
+  width: 30px; /* Adjust width */
+  height: 30px; /* Adjust height */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px; /* Adjust icon size */
+  padding: 10px;
+}
+
+.fa-instagram {
+  color: white;
+  border-radius: 50%;
+  width: 30px; /* Adjust width */
+  height: 30px; /* Adjust height */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px; /* Adjust icon size */
+  padding: 10px;
+}
+
+.fa-dribbble {
+    
+  color: white;
+  border-radius: 50%;
+  width: 30px; /* Adjust width */
+  height: 30px; /* Adjust height */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px; /* Adjust icon size */
+  padding: 10px;
+}
+  /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #121212;
+            color: white;
+        }
+   /* Header */
+   header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        position: fixed;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+        transition: transform 0.3s ease-in-out;
+        transform: translateY(0); /* Initially visible */
+}
+
+header.active {
+    transform: translateY(-100%); /* Hide the header by sliding it up */
+}
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    /* Mobile Menu */
+    .menu-toggle {
+        display: none;
+        cursor: pointer;
+    }
+
+    .menu-toggle span {
+        display: block;
+        width: 30px;
+        height: 3px;
+        background: white;
+        margin: 6px auto;
+        transition: 0.3s;
+    }
+/* Change color when menu is active */
+.menu-toggle.active span {
+    background:cyan; /* Change color when active */
+}
+
+    .menu-toggle.active span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 0 15px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: white;
+        transition: 0.3s;
+        position: relative;
+    }
+
+    nav ul li a:hover {
+        
+        color: cyan;
+    }
+
+    /* Active link */
+    nav ul li a.active {
+        
+        color: cyan;
+        font-weight: bold;
+    }
+
+    nav ul li a::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background: cyan;
+        bottom: -5px;
+        left: 0;
+        transform: scaleX(0);
+        transform-origin: bottom right;
+        transition: transform 0.3s ease-out;
+    }
+
+    nav ul li a:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    }
+
+    /* Mobile Navigation */
+    @media (max-width: 768px) {
+        .menu-toggle {
+            display: block;
+        }
+
+        nav {
+            position: absolute;
+            top: 70px;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            width: 200px;
+            text-align: center;
+            flex-direction: column;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        nav.active {
+            transform: translateX(0);
+        }
+
+        nav ul {
+            flex-direction: column;
+            padding: 20px 0;
+        }
+
+        nav ul li {
+            margin: 10px 0;
+        }
+        
+    }
+
+/* Sections should take full viewport height */
+section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+.section {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .section h2 span {
+            color: var(--main-color);
+        }
+
+
+        /* Contact Form */
+
+        .contact form {
+            
+            
+            
+            padding: 2rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            min-width:90%;
+            max-height: fit-content;
+          
+        }
+
+        .input-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .input-box input, 
+        .contact textarea {
+            width: 100%;
+            padding: 15px;
+            font-size: 1rem;
+            background: var(--input-bg);
+            border: 2px solid transparent;
+            color: var(--text-color);
+            border-radius: 8px;
+            outline: none;
+            transition: 0.3s ease;
+        }
+
+        .input-box input:focus,
+        .contact textarea:focus {
+            border-color: var(--main-color);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .contact textarea {
+            resize: none;
+            height: 150px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--main-color);
+            color: white;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #e64a19;
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .input-box {
+                flex-direction: column;
+            }
+        }
+        /* Hero Section */
+        #home {
+            background: url('aswasan.jpg') no-repeat center center/cover;
+        }
+        #about {
+    background-color: #121212;
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    padding-top: 90px;
+}
+
+.about-container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.profile img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.profile img:hover {
+    box-shadow: 0 0 25px rgba(0, 174, 255, 0.8);
+}
+.profile h2 {
+    font-size: 2rem;
+    color: #fff;
+}
+
+.profile .title {
+    color: #ccc;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.bio {
+    margin-top: 30px;
+    font-size: 1.1rem;
+}
+
+.bio h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: cyan;
+}
+
+.skills {
+    margin-top: 40px;
+}
+
+.skills h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: cyan;
+}
+
+.progress-bar {
+    margin: 15px 0;
+    text-align: left;
+}
+
+.progress-bar p {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.progress {
+    background-color: #333;
+    height: 8px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    background-color: cyan;
+    height: 100%;
+    width: 0;
+    transition: width 0.5s ease;
+}
+
+.technologies {
+    margin-top: 50px;
+}
+
+.technologies h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: cyan;
+}
+
+.tech-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    
+}
+
+.tech-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100px;
+}
+
+.tech-icon img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+   
+}
+
+.tech-icon p {
+    font-size: 1rem;
+    color: #ccc;
+}
+
+        .hero-content h1 {
+            font-size: 3rem;
+        }
+
+        .hero-content span {
+            color: cyan;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background: cyan;
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: white;
+        }
+
+        /* Projects Section */
+        .projects-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .project-card {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        .project-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+        }
+        .project-card:hover img {
+    filter: blur(3px); /* Adds blur effect to the image when hovered */
+}
+
+        /* Footer */
+        footer {
+            
+            text-align: center;
+            padding: 20px;
+            background: black;
+        }
+
+
+    .project-card {
+        background: #1e1e1e;
+        padding: 25px;
+        border-radius: 10px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        max-width: 350px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .project-card img {
+        width: 100%;
+        border-radius: 10px;
+        height: 100%;
+        
+    }
+
+    .project-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .project-description {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+       background-color: #33333360;
+        color: white;
+        padding: 15px;
+        transform: translateY(100%);
+        transition: transform 0.3s ease-in-out;
+        
+    }
+
+    .project-card:hover .project-description {
+        transform: translate(0%, -20%) translateY(0);
+    }
+
+h2 {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    letter-spacing: 5px; /* Space between letters */
+}
+
+h2::before,
+h2::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: cyan; /* Adjust color as needed */
+    margin: 0 10px; /* Space between text and line */
+}
+.projects-title {
+    position: relative;
+    font-size: 24px;
+    text-align: center;
+    letter-spacing: 3px;
+    display: inline-block;
+    padding: 0 20px;  /* Adjust padding as needed */
+}
+
+.projects-title::before,
+.projects-title::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 45%;  /* Adjust length of the lines */
+    height: 2px;
+    background-color: cyan;  /* Color of the lines */
+    transform: translateY(-50%);
+}
+
+.projects-title::before {
+    left: -50%;  /* Moves the left line outside of the text */
+}
+
+.projects-title::after {
+    right: -50%;  /* Moves the right line outside of the text */
+}
+/* Add a margin-top to the sections after the header to prevent overlap */
+
+
+
+/* Hero Section */
+.hero-content {
+    padding-top: 150px;
+}
+
+/* Social Media Icons */
+.social-icons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    
+}
+
+.social-icons a {
+    display: inline-block;
+}
+
+.social-icons img {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s;
+}
+
+.social-icons img:hover {
+    transform: scale(1.2);
+}
+/* Scroll to Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 70px;  /* Position from the bottom (adjusted for footer height) */
+    right: 30px;   /* Position from the right */
+    background-color: cyan; /* Dark background */
+    color: #fff;
+    font-size: 23px;
+    padding: 15px;
+    display: none; /* Hidden by default */
+    text-align: center;
+    text-decoration: none;
+    z-index: 999;  /* Ensure the button stays above other elements */
+    transition: opacity 0.3s ease; /* Smooth transition */
+}
+
+.scroll-to-top:hover {
+    background-color: rgba(0, 0, 0, 0.9); /* Darker on hover */
+}
+/* Hide navigation on larger screens */
+@media screen and (min-width: 768px) {
+    nav {
+        display: flex; /* Make the navigation visible on larger screens */
+    }
+    nav.active {
+        display: flex; /* Ensure it's displayed when active */
+    }
+}
+
+/* For mobile screens */
+@media screen and (max-width: 767px) {
+    nav {
+        display: none; /* Hide the menu by default */
+    }
+    nav.active {
+        display: block; /* Display when active */
+    }
+}
+/* The loader style */
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background:url('https://i.gifer.com/ZZ5H.gif') no-repeat center center;
+    background-size: 50px;
+    z-index: 9999;
+    display: none; /* Initially hidden */
+    opacity: 0; /* Start with 0 opacity */
+    transition: opacity 2s ease; /* Slow fade-in and fade-out effect */
+}
+
+/* Optional: Fade-in effect on load */
+body.loading #loader {
+    display: block; /* Show the loader */
+    opacity: 1; /* Make it fully visible */
+}
+.resume-btn {
+        border: 2px solid cyan;/* Blue border */
+        padding: 8px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: 0.3s;
+    }   
+ 
+/* My Interests Section */
+#interests {
+
+    padding: 20px;
+    text-align: center;
+    width: fit-content; /* Automatically adjusts width to content */
+    margin: 0 auto; /* Center the section */
+    height: auto; /* Allow the height to adjust based on content */
+    max-width: 90%; /* Limit width to 90% of the screen width */
+    box-sizing: border-box; /* Include padding in width/height calculation */
+}
+
+#interests h2 {
+    font-size: 1.8rem; /* Smaller title font size */
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+#interests h2 span {
+    color: #ff5733;
+}
+
+.interests {
+    display: flex; /* Use flexbox for a single line */
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping of items */
+}
+
+.interest-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    transition: 0.3s ease;
+    cursor: pointer;
+    flex: 1 1 30%; /* Adjust width to fit 3 items per row */
+    margin-bottom: 15px; /* Add space between rows */
+}
+
+.interest-box i {
+    font-size: 1.6rem; /* Adjust icon size */
+
+    margin-bottom: 8px;
+}
+
+.interest-box p {
+    font-size: 0.9rem; /* Smaller text */
+    color: white;
+}
+
+.interest-box:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .interests {
+        justify-content: space-between; /* Distribute items evenly */
+    }
+
+    .interest-box {
+        flex: 1 1 30%; /* Each box takes 30% width */
+    }
+
+    #interests {
+        height: auto; /* Allow section to be more compact */
+        max-width: 100%; /* Use full screen width on mobile */
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    <div id="loader"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo" >Aswasan</div>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="resume.pdf" download="my.jpg" class="resume-btn">Resume</a></li>
+            </ul>
+        </nav>
+    </header>
+<!-- Scroll to Top Button -->
+<a href="#" id="scroll-to-top" class="scroll-to-top">
+    ↑
+</a>
+
+    <!-- Hero Section -->
+
+<section id="home">
+    <div class="hero-content">
+        <h1>Hi, I'm <span>Aswasan Khadka</span></h1>
+        <p>Creative Web Developer & Designer</p>
+        <!-- Social Media Icons -->
+        <div class="social-icons">
+            <a href="https://www.facebook.com/ayush.khadka.9275" target="_blank" class="fa fa-facebook" alt="facebook"></a>
+            <a href="https://www.instagram.com/ayushh.khadka/" target="_blank" class="fa fa-instagram" alt="instagram"></a>
+            <a href="mailto:aswasankhadka9@gmail.com" target="_blank" class="fa fa-google" alt="gmail"></a>
+            <a href="aswasankhadka.com.np" target="_blank" class="fa fa-dribbble" alt="GitHub"></a>
+        </div>
+    </div>
+</section>
+
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="about-container">
+            <div class="profile">
+                <img src="my.jpg" alt="Profile Picture">
+                <h2>Aswasan Khadka</h2>
+                <p class="title">BICTE Student | Web Developer | Tech Enthusiast</p>
+            </div>
+            
+            <div class="bio">
+                <h3>About Me</h3>
+                <p>
+                    I'm an BICTE student passionate about web development, coding, and technology. 
+                    I love exploring new frameworks, programming languages, and digital trends. 
+                    My goal is to leverage my skills to build meaningful and innovative solutions.
+                </p>
+            </div>
+    
+            <div class="skills">
+                <h3>My Skills</h3>
+                <div class="progress-bar">
+                    <p>HTML & CSS</p>
+                    <div class="progress">
+                        <div class="progress-fill" style="width: 90%;"></div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <p>JavaScript</p>
+                    <div class="progress">
+                        <div class="progress-fill" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <p>Database</p>
+                    <div class="progress">
+                        <div class="progress-fill" style="width: 70%;"></div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="technologies">
+                <h3>Technologies I Work With</h3>
+                <div class="tech-icons">
+                    <div class="tech-icon">
+                        <img src="html.png" alt="HTML5">
+                        <p>HTML5</p>
+                    </div>
+                    <div class="tech-icon">
+                        <img src="css.png" alt="CSS3">
+                        <p>CSS3</p>
+                    </div>
+                    <div class="tech-icon">
+                        <img src="java.png" alt="JavaScript">
+                        <p>JavaScript</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section id="projects">
+        <h2 class="projects-title">Projects</h2>
+
+
+        <div class="projects-container">
+            <div class="project-card">
+                <a href="lovecal.html" target="_blank"><img src="lovecal.png" alt="Project 1">
+ </a>               <h3>LoveMeter</h3>
+                <div class="project-description">A LoveMeter is a fun and playful tool designed to calculate the compatibility between two people based on their names. It typically uses a predefined algorithm or a random percentage to generate results. While not scientifically accurate, it is often used for entertainment purposes.</div>
+            </div>
+            <div class="project-card">
+                <a href=""><img src="bicteblog.png" alt="Project 2"></a>
+                <h3>BICTE-BLOGS</h3>
+                <div class="project-description">A resource designed to support BICTE students, offering regular updates with past questions, notes, and syllabus information to keep you on track!</div>
+            </div>
+            <div class="project-card">
+                <img src="gif.gif" alt="Project 2">
+                <h3>More to come...</h3>
+                <div class="project-description">Pending...</div>
+            </div>
+    </section>
+    
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h1>My <span style="color: cyan;">Interests</span></h1>
+        <br>
+        <div class="interests">
+            <div class="interest-box">
+                
+                <p>Programming</p>
+            </div>
+            <div class="interest-box">
+                
+                <p>Music</p>
+            </div>
+            <div class="interest-box">
+             
+                <p>Photography</p>
+            </div>
+            <div class="interest-box">
+             
+                <p>Gaming</p>
+            </div>
+
+            <div class="interest-box">
+              
+                <p>Traveling</p>
+            </div>
+        </div>
+        <form action="#"><h2>Contact <span style="color: cyan;"> Me</span></h2>
+            <div class="input-box">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Email" required>
+            </div>
+
+            <textarea placeholder="Your Message" required></textarea>
+            <input type="submit" value="Send Message" class="btn">
+        </form><br>
+        <p>Design by <span style="color: cyan;">Aswasan Khadka</span></p>
+    </section> 
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const header = document.querySelector('header');  // Target the header
+        const nav = document.querySelector('nav');
+        const navLinks = document.querySelectorAll('nav ul li a');
+        let inactivityTimer;
+    
+        // Show the header
+        const showHeader = () => {
+            header.classList.remove('active');  // Ensure header is visible
+        };
+    
+        // Hide the header after inactivity
+        const hideHeader = () => {
+            header.classList.add('active');  // Hide the header
+        };
+    
+        // Reset inactivity timer and hide header after inactivity
+        const resetInactivityTimer = () => {
+            clearTimeout(inactivityTimer); // Clear the previous timer
+            inactivityTimer = setTimeout(hideHeader, 4000); // Hide header after 3 seconds of inactivity
+        };
+    
+        // Toggle the menu on click
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+    
+        // Close the menu if the user clicks outside
+        document.addEventListener('click', (event) => {
+            if (!nav.contains(event.target) && !menuToggle.contains(event.target)) {
+                nav.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+        // Close the menu when scrolling (for mobile screens)
+window.addEventListener('scroll', () => {
+    nav.classList.remove('active');
+    menuToggle.classList.remove('active');
+});
+    // Close the menu when a navigation link is clicked (for mobile screens)
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        menuToggle.classList.remove('active');
+    });
+});
+        // Show the header again when scrolling
+        window.addEventListener('scroll', () => {
+            showHeader(); // Show the header when scrolling
+            resetInactivityTimer(); // Reset the inactivity timer when scrolling
+        });
+    
+        // Show the header again when mouse is moved
+        window.addEventListener('mousemove', () => {
+            showHeader(); // Show the header when mouse is moved
+            resetInactivityTimer(); // Reset the inactivity timer when mouse is moved
+        });
+    
+        // Show the header again when the screen is touched
+        window.addEventListener('touchstart', () => {
+            showHeader(); // Show the header when the screen is touched
+            resetInactivityTimer(); // Reset the inactivity timer when the screen is touched
+        });
+    
+        // Initially show the header and start the inactivity timer
+        showHeader(); // Header appears immediately when the page loads
+        resetInactivityTimer(); // Start the inactivity timer when the page loads
+        // Select all sections and nav links
+        const sections = document.querySelectorAll("section");
+// Optional: Fade in sections as they come into view
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.transition = "opacity 1s ease-in-out"; // Smooth transition for opacity
+            entry.target.style.opacity = 1; // Make section visible
+        } else {
+            entry.target.style.opacity = 0; // Make section invisible
+        }
+    });
+}, { threshold: 0.2 }); // Trigger when 20% of the section is visible
+
+sections.forEach(section => {
+    section.style.opacity = 0; // Start sections with 0 opacity
+    observer.observe(section); // Observe each section
+});
+
+// Highlight active nav link based on the current section in view
+const updateActiveNavLink = () => {
+    let currentSection = "";
+    sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.5 && rect.bottom >= window.innerHeight * 0.5) {
+            currentSection = section.id; // Get the ID of the section currently in view
+        }
+    });
+
+    navLinks.forEach(link => {
+        const linkHref = link.getAttribute('href').substring(1); // Remove the "#" from the href
+        if (currentSection === linkHref) {
+            link.classList.add('active'); // Highlight the active link
+        } else {
+            link.classList.remove('active'); // Remove highlight from non-active links
+        }
+    });
+};
+
+// Listen for scroll events and update active link
+window.addEventListener("scroll", updateActiveNavLink);
+
+// Update active nav link when the page loads or reloads
+document.addEventListener("DOMContentLoaded", updateActiveNavLink);
+
+// Ensure the correct section is highlighted when the page is loaded at a specific scroll position
+updateActiveNavLink();
+        
+// Get the button and the footer
+const scrollToTopBtn = document.getElementById('scroll-to-top');
+const footer = document.querySelector('footer');
+
+// Function to adjust button position based on footer height
+function adjustButtonPosition() {
+    const footerHeight = footer ? footer.offsetHeight : 0;  // Get the height of the footer
+    scrollToTopBtn.style.bottom = `${footerHeight + 20}px`; // Adjust the button's bottom position
+}
+
+// Show the button when scrolling down
+window.onscroll = function() {
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        scrollToTopBtn.style.display = "block"; // Show the button
+    } else {
+        scrollToTopBtn.style.display = "none"; // Hide the button
+    }
+};
+
+// Scroll to top when the button is clicked
+scrollToTopBtn.onclick = function(e) {
+    e.preventDefault(); // Prevent the default link behavior
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to the top
+};
+
+// Adjust the button position on page load and window resize
+window.onload = adjustButtonPosition;
+window.onresize = adjustButtonPosition;
+// Update active nav link when the page loads or reloads
+document.addEventListener("DOMContentLoaded", () => {
+    updateActiveNavLink();
+    
+    // Scroll to Home section when the page loads (reset to Home)
+    const homeSection = document.getElementById("home"); // Make sure your Home section has the id="home"
+    if (homeSection) {
+        homeSection.scrollIntoView({ behavior: "smooth" });
+    }
+});
+
+// Ensure the correct section is highlighted when the page is loaded at a specific scroll position
+updateActiveNavLink();
+// Listen for window resize events to hide/show nav based on screen size
+window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) {
+        nav.classList.remove('active');
+        menuToggle.classList.remove('active');
+    }
+});
+// Get the loader element
+const loader = document.getElementById('loader');
+
+// Show the loader when the page is loading (when the page is being refreshed or unloaded)
+window.addEventListener('beforeunload', () => {
+    document.body.classList.add('loading'); // Add loading class to show the loader
+});
+
+// Simulate slow internet connection by adding a delay to the page load
+window.addEventListener('load', () => {
+    // Simulate a slow loading by adding a delay before hiding the loader
+    setTimeout(() => {
+        document.body.classList.remove('loading'); // Remove the loading class after a delay
+    }, 100000000); // Keep loader visible for 8 seconds (adjust as needed)
+});
+
+    </script>
+    
+    </body>
+</html>
