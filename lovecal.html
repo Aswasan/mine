@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="lovecal.css">
+    <link rel="shortcut icon" href="images.png" type="png">
+    
+    <title>Maya prem</title>
+</head>
+<body>
+    <header>
+        <h1>Love Meter</h1>
+        <span>Love Paro Vanesi👀</span>
+    </header>
+
+    <form class="love-calculator"><br>
+        <label for="name1" style="color:rgb(255, 255, 255);">Your name: </label><input type="nam" id="name1" placeholder="Your name...">
+        <br>
+        <label for="name2" style="color: rgb(255, 255, 255);">Your patner's name: </label>
+        <input type="text" id="name2" placeholder="Your patner's name....">
+
+        <br>
+        <button type="button" onclick="calculateLove()">
+          <svg class="empty"  viewBox="0 0 24 24" width="32" height="32"><path fill="none" d="M0 0H24V24H0z"></path><path d="M16.5 3C19.538 3 22 5.5 22 9c0 7-7.5 11-10 12.5C9.5 20 2 16 2 9c0-3.5 2.5-6 5.5-6C9.36 3 11 4 12 5c1-1 2.64-2 4.5-2zm-3.566 15.604c.881-.556 1.676-1.109 2.42-1.701C18.335 14.533 20 11.943 20 9c0-2.36-1.537-4-3.5-4-1.076 0-2.24.57-3.086 1.414L12 7.828l-1.414-1.414C9.74 5.57 8.576 5 7.5 5 5.56 5 4 6.656 4 9c0 2.944 1.666 5.533 4.645 7.903.745.592 1.54 1.145 2.421 1.7.299.189.595.37.934.572.339-.202.635-.383.934-.571z"></path></svg>
+          <svg class="filled" height="32" width="32" viewBox="0 0 24 24"><path d="M0 0H24V24H0z" fill="none"></path><path d="M16.5 3C19.538 3 22 5.5 22 9c0 7-7.5 11-10 12.5C9.5 20 2 16 2 9c0-3.5 2.5-6 5.5-6C9.36 3 11 4 12 5c1-1 2.64-2 4.5-2z"></path></svg>
+          Calculate
+        </button>
+        
+<br>
+        <p id="result" style="color: crimson; font-size: medium; font-weight: bold;  border:10%"></p>
+    </form>
+
+    <script>
+        function calculateLove() {
+            var name1 = document.getElementById('name1').value.toLowerCase();
+            var name2 = document.getElementById('name2').value.toLowerCase();
+
+            var loveScore = calculateScore(name1, name2);
+
+            var resultElement = document.getElementById('result');
+            resultElement.textContent = name1 + ' and ' + name2 + ' have a love score of ' + loveScore + '%.';
+        }
+
+        function calculateScore(name1, name2) {
+            var score = 0;
+            var combinedName = name1 + name2;
+
+            for (var i = 0; i < combinedName.length; i++) {
+                score += combinedName.charCodeAt(i);
+            }
+
+            return score % 101;
+        }
+    </script>
+    <footer style="color:cyan; position: absolute; left: 37%;">Copyright &copy; 2023 Aswasan. All rights reserved.</footer>
+</body>
+</html>
