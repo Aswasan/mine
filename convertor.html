@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f0f4f8;
+            padding: 20px;
+        }
+        
+        .header {
+            background-color: #3d4c5e;
+            color: white;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        
+        .calculator-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .calculator-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .calculator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #3d4c5e;
+        }
+        
+        .calculator-card h2 {
+            font-size: 1.5rem;
+            color: #3d4c5e;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .calculator-content {
+            display: none;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .calculator-content.active {
+            display: block;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #3d4c5e;
+        }
+        
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        button {
+            background-color: #3d4c5e;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.2s;
+        }
+        
+        button:hover {
+            background-color: #2c3846;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f4f8;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Financial Calculator</h1>
+        <p>List of useful financial calculators</p>
+    </div>
+    
+    <div class="calculator-container">
+        <!-- Currency Converter -->
+        <div class="calculator-card" id="currency-card">
+            <div class="card-icon">💱</div>
+            <h2>Currency Converter</h2>
+            <div class="calculator-content" id="currency-content">
+                <div class="input-group">
+                    <label for="amount">Amount</label>
+                    <input type="number" id="amount" placeholder="Enter amount">
+                </div>
+                <div class="input-group">
+                    <label for="from-currency">From</label>
+                    <select id="from-currency">
+                        <option value="USD">USD - US Dollar</option>
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="GBP">GBP - British Pound</option>
+                        <option value="JPY">JPY - Japanese Yen</option>
+                        <option value="NPR">NPR - Nepalese Rupee</option>
+                        <option value="INR">INR - Indian Rupee</option>
+                        <option value="CAD">CAD - Canadian Dollar</option>
+                        <option value="AUD">AUD - Australian Dollar</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="to-currency">To</label>
+                    <select id="to-currency">
+                        <option value="USD">USD - US Dollar</option>
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="GBP">GBP - British Pound</option>
+                        <option value="JPY">JPY - Japanese Yen</option>
+                        <option value="NPR" selected>NPR - Nepalese Rupee</option>
+                        <option value="INR">INR - Indian Rupee</option>
+                        <option value="CAD">CAD - Canadian Dollar</option>
+                        <option value="AUD">AUD - Australian Dollar</option>
+                    </select>
+                </div>
+                <button id="convert-btn">Convert</button>
+                <div class="result" id="conversion-result">Result will appear here</div>
+            </div>
+        </div>
+        
+        <!-- Bill Split -->
+        <div class="calculator-card" id="bill-card">
+            <div class="card-icon">🧾</div>
+            <h2>Bill Splitter</h2>
+            <div class="calculator-content" id="bill-content">
+                <div class="input-group">
+                    <label for="bill-amount">Total Bill Amount</label>
+                    <input type="number" id="bill-amount" placeholder="Enter bill amount">
+                </div>
+                <div class="input-group">
+                    <label for="num-people">Number of People</label>
+                    <input type="number" id="num-people" placeholder="Enter number of people" min="1">
+                </div>
+                <div class="input-group">
+                    <label for="tip-percentage">Tip Percentage (%)</label>
+                    <input type="number" id="tip-percentage" placeholder="Enter tip percentage" value="15">
+                </div>
+                <button id="split-btn">Split Bill</button>
+                <div class="result" id="split-result">Result will appear here</div>
+            </div>
+        </div>
+        
+        <!-- English to Nepali Converter -->
+        <div class="calculator-card" id="nepali-card">
+            <div class="card-icon">🔤</div>
+            <h2>English to Nepali Converter</h2>
+            <div class="calculator-content" id="nepali-content">
+                <div class="input-group">
+                    <label for="english-text">English Text</label>
+                    <input type="text" id="english-text" placeholder="Enter English text">
+                </div>
+                <button id="translate-btn">Translate</button>
+                <div class="result" id="nepali-result">Translation will appear here</div>
+            </div>
+        </div>
+        
+        <!-- Compound Interest Calculator (from the image) -->
+        <div class="calculator-card" id="compound-card">
+            <div class="card-icon">$</div>
+            <h2>Compound Interest</h2>
+            <div class="calculator-content" id="compound-content">
+                <div class="input-group">
+                    <label for="principal">Principal Amount</label>
+                    <input type="number" id="principal" placeholder="Enter principal amount">
+                </div>
+                <div class="input-group">
+                    <label for="interest-rate">Annual Interest Rate (%)</label>
+                    <input type="number" id="interest-rate" placeholder="Enter interest rate">
+                </div>
+                <div class="input-group">
+                    <label for="time-period">Time Period (Years)</label>
+                    <input type="number" id="time-period" placeholder="Enter time in years">
+                </div>
+                <div class="input-group">
+                    <label for="compound-frequency">Compound Frequency</label>
+                    <select id="compound-frequency">
+                        <option value="1">Annually</option>
+                        <option value="2">Semi-Annually</option>
+                        <option value="4">Quarterly</option>
+                        <option value="12">Monthly</option>
+                        <option value="365">Daily</option>
+                    </select>
+                </div>
+                <button id="calculate-compound-btn">Calculate</button>
+                <div class="result" id="compound-result">Result will appear here</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle calculator content when clicking on cards
+        document.querySelectorAll('.calculator-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const content = this.querySelector('.calculator-content');
+                const isActive = content.classList.contains('active');
+                
+                // Close all calculator contents first
+                document.querySelectorAll('.calculator-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Toggle the current one if it wasn't active
+                if (!isActive) {
+                    content.classList.add('active');
+                }
+            });
+        });
+        
+        // Currency conversion functionality
+        document.getElementById('convert-btn').addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent card toggle
+            
+            const amount = parseFloat(document.getElementById('amount').value);
+            const fromCurrency = document.getElementById('from-currency').value;
+            const toCurrency = document.getElementById('to-currency').value;
+            
+            if (isNaN(amount)) {
+                document.getElementById('conversion-result').textContent = 'Please enter a valid amount';
+                return;
+            }
+            
+            // Exchange rates (simplified)
+            const exchangeRates = {
+                'USD': { 'USD': 1, 'EUR': 0.85, 'GBP': 0.75, 'JPY': 114, 'NPR': 133, 'INR': 83, 'CAD': 1.25, 'AUD': 1.35 },
+                'EUR': { 'USD': 1.18, 'EUR': 1, 'GBP': 0.88, 'JPY': 130, 'NPR': 156, 'INR': 98, 'CAD': 1.47, 'AUD': 1.58 },
+                'GBP': { 'USD': 1.34, 'EUR': 1.14, 'GBP': 1, 'JPY': 150, 'NPR': 177, 'INR': 111, 'CAD': 1.67, 'AUD': 1.80 },
+                'JPY': { 'USD': 0.0088, 'EUR': 0.0077, 'GBP': 0.0067, 'JPY': 1, 'NPR': 1.17, 'INR': 0.73, 'CAD': 0.011, 'AUD': 0.012 },
+                'NPR': { 'USD': 0.0075, 'EUR': 0.0064, 'GBP': 0.0057, 'JPY': 0.85, 'NPR': 1, 'INR': 0.63, 'CAD': 0.0094, 'AUD': 0.01 },
+                'INR': { 'USD': 0.012, 'EUR': 0.010, 'GBP': 0.0090, 'JPY': 1.37, 'NPR': 1.60, 'INR': 1, 'CAD': 0.015, 'AUD': 0.016 },
+                'CAD': { 'USD': 0.80, 'EUR': 0.68, 'GBP': 0.60, 'JPY': 91, 'NPR': 106, 'INR': 66, 'CAD': 1, 'AUD': 1.08 },
+                'AUD': { 'USD': 0.74, 'EUR': 0.63, 'GBP': 0.56, 'JPY': 84, 'NPR': 99, 'INR': 62, 'CAD': 0.93, 'AUD': 1 }
+            };
+            
+            const convertedAmount = amount * exchangeRates[fromCurrency][toCurrency];
+            document.getElementById('conversion-result').textContent = `${amount} ${fromCurrency} = ${convertedAmount.toFixed(2)} ${toCurrency}`;
+        });
+        
+        // Bill split functionality
+        document.getElementById('split-btn').addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent card toggle
+            
+            const billAmount = parseFloat(document.getElementById('bill-amount').value);
+            const numPeople = parseInt(document.getElementById('num-people').value);
+            const tipPercentage = parseFloat(document.getElementById('tip-percentage').value);
+            
+            if (isNaN(billAmount) || isNaN(numPeople) || numPeople < 1) {
+                document.getElementById('split-result').textContent = 'Please enter valid values';
+                return;
+            }
+            
+            const tipAmount = billAmount * (tipPercentage / 100);
+            const totalAmount = billAmount + tipAmount;
+            const amountPerPerson = totalAmount / numPeople;
+            
+            document.getElementById('split-result').innerHTML = 
+                `Total (with ${tipPercentage}% tip): $${totalAmount.toFixed(2)}<br>` +
+                `Tip amount: $${tipAmount.toFixed(2)}<br>` +
+                `Each person pays: $${amountPerPerson.toFixed(2)}`;
+        });
+        
+        // English to Nepali converter functionality (simplified)
+        document.getElementById('translate-btn').addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent card toggle
+            
+            const englishText = document.getElementById('english-text').value;
+            
+            if (!englishText) {
+                document.getElementById('nepali-result').textContent = 'Please enter some text';
+                return;
+            }
+            
+            // Simple mapping for demo purposes
+            const translations = {
+                'hello': 'नमस्ते',
+                'good morning': 'शुभ प्रभात',
+                'thank you': 'धन्यवाद',
+                'yes': 'हो',
+                'no': 'होइन',
+                'how are you': 'तपाईं कस्तो हुनुहुन्छ',
+                'goodbye': 'नमस्कार',
+                'welcome': 'स्वागत छ'
+            };
+            
+            let translatedText = 'Translation not available';
+            const lowerText = englishText.toLowerCase();
+            
+            if (translations[lowerText]) {
+                translatedText = translations[lowerText];
+            }
+            
+            document.getElementById('nepali-result').textContent = translatedText;
+        });
+        
+        // Compound interest calculator functionality
+        document.getElementById('calculate-compound-btn').addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent card toggle
+            
+            const principal = parseFloat(document.getElementById('principal').value);
+            const rate = parseFloat(document.getElementById('interest-rate').value);
+            const time = parseFloat(document.getElementById('time-period').value);
+            const frequency = parseInt(document.getElementById('compound-frequency').value);
+            
+            if (isNaN(principal) || isNaN(rate) || isNaN(time)) {
+                document.getElementById('compound-result').textContent = 'Please enter valid values';
+                return;
+            }
+            
+            // Compound interest formula: A = P(1 + r/n)^(nt)
+            const rateDecimal = rate / 100;
+            const amount = principal * Math.pow(1 + (rateDecimal / frequency), frequency * time);
+            const interest = amount - principal;
+            
+            document.getElementById('compound-result').innerHTML = 
+                `Future Value: $${amount.toFixed(2)}<br>` +
+                `Total Interest Earned: $${interest.toFixed(2)}`;
+        });
+        
+        // Prevent button clicks from toggling card
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+        
+        // Prevent input fields from toggling card
+        document.querySelectorAll('input, select').forEach(input => {
+            input.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+    </script>
+</body>
+</html>
